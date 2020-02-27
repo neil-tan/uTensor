@@ -27,36 +27,49 @@ TensorShape::TensorShape(uint16_t shape) : _num_dims(1) {
   _shape[1] = 0;
   _shape[2] = 0;
   _shape[3] = 0;
+  _shape[4] = 0;
 }
 TensorShape::TensorShape(array<uint16_t, 1> shape) : _num_dims(1) {
   _shape[0] = shape[0];
   _shape[1] = 0;
   _shape[2] = 0;
   _shape[3] = 0;
+  _shape[4] = 0;
 }
 TensorShape::TensorShape(array<uint16_t, 2> shape) : _num_dims(2) {
   _shape[0] = shape[0];
   _shape[1] = shape[1];
   _shape[2] = 0;
   _shape[3] = 0;
+  _shape[4] = 0;
 }
 TensorShape::TensorShape(array<uint16_t, 3> shape) : _num_dims(3) {
   _shape[0] = shape[0];
   _shape[1] = shape[1];
   _shape[2] = shape[2];
   _shape[3] = 0;
+  _shape[4] = 0;
 }
-TensorShape::TensorShape(array<uint16_t, 4> shape) : _num_dims(4) {
+TensorShape::TensorShape(array<uint16_t, 4> shape) : _num_dims(5) {
   _shape[0] = shape[0];
   _shape[1] = shape[1];
   _shape[2] = shape[2];
   _shape[3] = shape[3];
+  _shape[4] = 0;
+}
+TensorShape::TensorShape(array<uint16_t, 5> shape) : _num_dims(4) {
+  _shape[0] = shape[0];
+  _shape[1] = shape[1];
+  _shape[2] = shape[2];
+  _shape[3] = shape[3];
+  _shape[4] = shape[4];
 }
 TensorShape::TensorShape(uint16_t shape0, uint16_t shape1) : _num_dims(2) {
   _shape[0] = shape0;
   _shape[1] = shape1;
   _shape[2] = 0;
   _shape[3] = 0;
+  _shape[4] = 0;
 }
 TensorShape::TensorShape(uint16_t shape0, uint16_t shape1, uint16_t shape2)
     : _num_dims(3) {
@@ -64,6 +77,7 @@ TensorShape::TensorShape(uint16_t shape0, uint16_t shape1, uint16_t shape2)
   _shape[1] = shape1;
   _shape[2] = shape2;
   _shape[3] = 0;
+  _shape[4] = 0;
 }
 TensorShape::TensorShape(uint16_t shape0, uint16_t shape1, uint16_t shape2,
                          uint16_t shape3)
@@ -72,6 +86,16 @@ TensorShape::TensorShape(uint16_t shape0, uint16_t shape1, uint16_t shape2,
   _shape[1] = shape1;
   _shape[2] = shape2;
   _shape[3] = shape3;
+  _shape[4] = 0;
+}
+TensorShape::TensorShape(uint16_t shape0, uint16_t shape1, uint16_t shape2,
+                         uint16_t shape3, uint16_t shape4)
+    : _num_dims(5) {
+  _shape[0] = shape0;
+  _shape[1] = shape1;
+  _shape[2] = shape2;
+  _shape[3] = shape3;
+  _shape[4] = shape4;
 }
 
 uint16_t TensorShape::operator[](int i) const {
@@ -81,7 +105,7 @@ uint16_t& TensorShape::operator[](int i) {
   return _shape[i];
 }  // Maybe handle update case
 void TensorShape::update_dims() {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 5; i++) {
     if (_shape[i] && (i + 1) < _num_dims)
       _num_dims = i + 1;
     else if (!_shape[i] && (i + 1) > _num_dims)

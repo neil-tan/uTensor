@@ -12,10 +12,13 @@ class TensorShape {
   TensorShape(uint16_t shape1, uint16_t shape2, uint16_t shape3);
   TensorShape(uint16_t shape1, uint16_t shape2, uint16_t shape3,
               uint16_t shape4);
+  TensorShape(uint16_t shape1, uint16_t shape2, uint16_t shape3,
+              uint16_t shape4, uint16_t shape5);  //NT: there's probably a more generalized way to do this
   TensorShape(array<uint16_t, 1> shape);
   TensorShape(array<uint16_t, 2> shape);
   TensorShape(array<uint16_t, 3> shape);
   TensorShape(array<uint16_t, 4> shape);
+  TensorShape(array<uint16_t, 5> shape);
 
   uint16_t operator[](int i) const;
   uint16_t& operator[](int i);
@@ -25,7 +28,7 @@ class TensorShape {
   uint32_t linear_index(uint16_t i, uint16_t j, uint16_t k, uint16_t l) const;
 
  private:
-  uint16_t _shape[4];
+  uint16_t _shape[5];
   uint8_t _num_dims;
 };
 // Do something to remember current type
